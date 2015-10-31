@@ -36,37 +36,37 @@ int main (int argc, char *argv[]) {
     //The block below handles arguments from the command line
     i =1;
     while (i < argc){
-	if (argv[i] == "-w"){
+	if (!strcmp(argv[i] , "-w")){
 	    //width flag
 	    i++;
 	    if isdigit(argv[i]){
-		width = argv[i]
+		width = argv[i];
 		i++;
 	    }
 	}
-	else if (argv[i] == "-r"){
+	else if (!strcmp(argv[i] , "-r")){
 	    //right alignment
 	    alignment = 1;
 	    i++;
 	}
-	else if (argv[i] == "-j"){
+	else if (!strcmp(argv[i] , "-j")){
 	    //justified
 	    alignment = 2;
 	    i++;
 	}
-	else if (argv[i] == "-s"){
+	else if (!strcmp(argv[i] , "-s")){
 	    //compress spaces
 	    compress = 1;
 	    i++;
 	}
-	else if (argv[i] == ("-h" || "-?")){
+	else if ((!strcmp(argv[i] , "-h")) || (!strcmp(argv[i] , "-?"))){
 	    //print usage message and exit program
 	}
 	else {
 	    //exit program. Case of no additional arguments is handled by while loop
 	}
     }
-    endnode = &input;
+    //endnode = &input;
 
     //infinite while, broken when we get EOF
     while (1) {
@@ -92,7 +92,6 @@ int main (int argc, char *argv[]) {
 	    
 	    //if there is a newline character!!
 	    scanf("%1[/n]", &(input->word[0]));
-	    struct wordnode next;
 	    input->nextword = &next;
 	    input = &next;
 	}
@@ -112,14 +111,14 @@ int main (int argc, char *argv[]) {
 	input = &rootnode;
 	j = 0;
 	while(1) {
-	    j += input.length;
+	    j += input->length;
 	    if (j <= width) {
-		printf("%s ",input.word[0]);
+		printf("%s ",input->word[0]);
 	    }
 	    else{
 		printf("\n");
-		printf("%s ",input.word[0]);
-		j = input.length;
+		printf("%s ",input->word[0]);
+		j = input->length;
 	    }
 	    
 	    
