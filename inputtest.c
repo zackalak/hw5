@@ -131,14 +131,6 @@ int main (int argc, char *argv[]) {
 	    break;
 	}
     }
-    /*debug: traverse list and print
-	input = &rootnode;
-	while (input != tail) {
-	    puts ( input->word );
-	    input = input->nextword;
-	}
-	puts ( tail->word );
-    */
     right ( &rootnode, tail, 12 );
 }
 
