@@ -36,6 +36,7 @@ int main (int argc, char *argv[]) {
     //The block below handles arguments from the command line
     i =1;
     while (i < argc){
+	printf("%s", argv[i]);
 	if (!strcmp(argv[i] , "-w")){
 	    //width flag
 	    i++;
@@ -70,6 +71,7 @@ int main (int argc, char *argv[]) {
 
     //infinite while, broken when we get EOF
     while (1) {
+	printf("Input loop");
 
 	//read a word into the array of the wordnode pointed to by input and test for EOF
 	if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
