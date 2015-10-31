@@ -1,28 +1,29 @@
-.\" Sample man page for CSCI 241
-.\" Benjamin Kuperman - Fall 2011
+.\" Man page for format
+.\" Zachary Sheldon and Sam Meizlish
 
 .TH format 1 "October 31 2011" "CSCI 241" "Oberlin College"
 
 .SH NAME
-.B format - simple text formatter
-\- an example of a sample man page
+.B format
+\- - simple text formatter
 
 .SH SYNOPSIS
 .B format
 [ -FLAG ][OPTION]...
-< filename
 
 .SH DESCRIPTION
-Does everything a sample man page should do.
+Formats the output of text into neat paragraphs.
 
 .SH OPTIONS
 .IP "-w <width>"
 Specify the output width.
-.IP"-r"
+.IP "-r"
 Output the text aligned on the right.
-.IP"-j"
+.IP "-j"
 Output the text with justified alignment.
-.IP"-h or -?"
+.IP "-s"
+Compresses multiple newlines into a single newline.
+.IP "-h or -?"
 Prints usage message.
 
 .SH AUTHORS
