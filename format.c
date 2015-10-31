@@ -29,10 +29,10 @@ int main (int argc, char *argv[]) {
     //declare a root node
     struct wordnode rootnode;
     //last node in the list
-    struct wordnode endnode;
     //pointer to root node
     struct wordnode *input = &rootnode;
     
+    struct wordnode *endnode = input;
     //The block below handles arguments from the command line
     i =1;
     while (i < argc){
@@ -71,7 +71,6 @@ int main (int argc, char *argv[]) {
 
     //infinite while, broken when we get EOF
     while (1) {
-	printf("Input loop");
 
 	//read a word into the array of the wordnode pointed to by input and test for EOF
 	if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
@@ -99,6 +98,7 @@ int main (int argc, char *argv[]) {
 	}
 	else break;
     }
+    *endnode = *input;
     if (alignment){
 	if (alignment > 1){
 	    //justified
@@ -109,23 +109,34 @@ int main (int argc, char *argv[]) {
 	}
     }
     else{
+	printf("left aligned");
 	//left aligned
 	input = &rootnode;
 	j = 0;
 	while(1) {
 	    j += input->length;
+	    char *let = &(input->word[0]);
 	    if (j <= width) {
-		printf("%s ",input->word[0]);
+		while (*let != '\0'){
+		    printf("%c ",*let);
+		    let++;
+	    
+		}
 	    }
 	    else{
 		printf("\n");
-		printf("%s ",input->word[0]);
+		while (*let != '\0'){
+		    printf("%c ",input->word[0]);
+		    let++;
+		}
 		j = input->length;
 	    }
 	    
 	    
-	    
-	    
+	    if (&input == &endnode){
+		break;
+	    }
+	    input = &(input->nextword);
 	    
 	    
 	}
