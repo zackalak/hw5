@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 //basic node struct in a linked list of words
 struct wordnode {
 
@@ -40,11 +41,9 @@ struct wordnode {
     //pointer to the next word
     struct wordnode *nextword;
     
-    //length of the word, can't be properly iterated with current scanf()
     int length;
 };
 
-//from rightfunc.c
 void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 
     //pointers to the current node and last/first words on the current line
@@ -76,11 +75,9 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
     //print out the line
 	margin = width - currwidth;
 	//print [margin] spaces
-	for ( int i = 0; i < margin; i++ ) {
-	    printf ( " " );
-	}
+	for ( int i = 0; i < margin; i++ ) printf ( " " );
+	
 	current = firstonline;
-
 	while ( current != lastonline ) {
 	    fputs( current->word, stdout );
 	    printf( " " );
@@ -96,28 +93,19 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 
 int main (int argc, char *argv[]) {
     
-    //declare a root node
+    //initialize a root node
     struct wordnode rootnode;
     //pointer to root node
     struct wordnode *input = &rootnode;
     //pointer to last node
     struct wordnode *tail;
-    //handle args
     
+    //TODO: handle args
 
     //infinite while, broken when we get EOF
     while (1) {
 
 	if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
-	    
-	    /*
-	    //echo back the word we just read in, char by char 
-	    char *letter = &( input->word[ 0 ] );
-	    while ( *letter != '\0' ) {
-		printf ("%c", *letter );
-		letter++;
-	    }
-	    */
 	    
 	    input->length = strlen( input->word );
 	    
@@ -131,7 +119,7 @@ int main (int argc, char *argv[]) {
 	    break;
 	}
     }
-    right ( &rootnode, tail, 12 );
+    right ( &rootnode, tail, 13 );
 }
 
 
