@@ -76,11 +76,11 @@ int main (int argc, char *argv[]) {
 	if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
 	    
 	    //echo back the word we just read in, char by char 
-	    char *letter = &( input->word[ 0 ] );
-	    while ( *letter != '\0' ) {
-		printf ("%c", *letter );
-		letter++;
-	    }
+	    //char *letter = &( input->word[ 0 ] );
+	    //while ( *letter != '\0' ) {
+	//	printf ("%c", *letter );
+	//	letter++;
+	  //  }
 	    
 	    //no EOF: there are more words, so we add on to the end of the list
 	    //create a new wordnode,
