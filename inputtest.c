@@ -100,13 +100,12 @@ int main (int argc, char *argv[]) {
     struct wordnode *tail;
 
     char blanks[ 100 ] = "";
-    
     //TODO: handle args
 
     //infinite while, broken when we get EOF
     while (1) {
 	//test for empty lines
-	if ( scanf ( "%[\n]", blanks ) > 1 ) {
+	if ( scanf ( "%[\n]", blanks ) > 0) {
 	    printf ( "got a newline\n" );
 	    printf ( "%d", strlen ( blanks ) );
 	}
