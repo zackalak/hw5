@@ -31,6 +31,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "format.h"
 
 //basic node struct in a linked list of words
 struct wordnode {
