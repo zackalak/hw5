@@ -41,7 +41,10 @@ struct wordnode {
     struct wordnode *nextword;
     int length;
 };
-
+void justified ( struct wordnode *head, struct wordnode *tail, int width ) {
+}
+void left ( struct wordnode *head, struct wordnode *tail, int width ) {
+}
 void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 
     //pointers to the current node and last/first words on the current line
@@ -149,8 +152,8 @@ while (i < argc){
     while (1) {
 	//test for empty lines
 
-	if ( scanf ( "%[^\x20-\x7F]", &(input->word[0]) )  ) {
-	    input->length = strlen( input->word );
+	if (( scanf ( "%[^\x20-\x7F]", &(input->word[0]) ) != EOF )) {
+	    input->length = 1;//strlen( input->word );
 	    
 	    //no EOF: there are more words, so we add on to the end of the list
 	    input->nextword = malloc( sizeof( struct wordnode ) );
@@ -177,7 +180,15 @@ while (i < argc){
 	}
     }
 
-    right ( &rootnode, tail, 13 );
+    if (alignment == 1){
+	right ( &rootnode, tail, width );
+    }
+    else if (alignment == 0){
+	left (&rootnode, tail, width);
+    }
+    else if (alignment == 2){
+	justified (&rootnode, tail, width);
+    }
 }
 
 
