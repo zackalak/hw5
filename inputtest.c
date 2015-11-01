@@ -99,16 +99,23 @@ int main (int argc, char *argv[]) {
     //pointer to last node
     struct wordnode *tail;
 
-    char blanks[ 100 ] = "";
+    //char blanks[ 100 ] = "";
     
     //TODO: handle args
 
     //infinite while, broken when we get EOF
     while (1) {
 	//test for empty lines
-	if ( scanf ( "%[\n]", blanks ) > 1 ) {
-	    printf ( "got a newline\n" );
-	    printf ( "%d", strlen ( blanks ) );
+	if ( scanf ( "%[^\x20-\x7F]", &(input->word[0]) )  ) {
+	    input->length = strlen( input->word );
+	    
+	    //no EOF: there are more words, so we add on to the end of the list
+	    input->nextword = malloc( sizeof( struct wordnode ) );
+	    //point input to it for the next iteration of the loop
+	    input = input->nextword;
+	    
+	    //printf ( "got a newline\n" );
+	    //printf ( "%d", strlen ( blanks ) );
 	}
 	
 	else if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
