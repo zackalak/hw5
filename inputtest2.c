@@ -44,8 +44,6 @@ struct wordnode {
 };
 void justified ( struct wordnode *head, struct wordnode *tail, int width ) {
 }
-void left ( struct wordnode *head, struct wordnode *tail, int width ) {
-}
 void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 
     //pointers to the current node and last/first words on the current line
