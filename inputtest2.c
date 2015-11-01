@@ -39,9 +39,6 @@ struct wordnode {
     
     //pointer to the next word
     struct wordnode *nextword;
-    int alignment = 0;
-    int compress = 0;
-    int width = 72;
     int length;
 };
 
@@ -91,6 +88,10 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 	currwidth = 0;
     }
 }
+
+int alignment = 0;
+int compress = 0;
+int width = 72;
 
 int main (int argc, char *argv[]) {
     
