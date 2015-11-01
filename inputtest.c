@@ -34,7 +34,6 @@
 
 //basic node struct in a linked list of words
 struct wordnode {
-
     //array of chars to hold the word (we're told max length is 100)
     char word[ 100 ];
     
@@ -99,26 +98,34 @@ int main (int argc, char *argv[]) {
     struct wordnode *input = &rootnode;
     //pointer to last node
     struct wordnode *tail;
+
+    char blanks[ 100 ] = "";
     
     //TODO: handle args
 
     //infinite while, broken when we get EOF
     while (1) {
-
-	if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
-	    
+	//test for empty lines
+	if ( scanf ( "%[\n]", blanks ) > 1 ) {
+	    printf ( "got a newline\n" );
+	    printf ( "%d", strlen ( blanks ) );
+	}
+	
+	else if ( scanf( "%s", &( input->word[ 0 ] ) ) != EOF ) { 
 	    input->length = strlen( input->word );
 	    
 	    //no EOF: there are more words, so we add on to the end of the list
 	    input->nextword = malloc( sizeof( struct wordnode ) );
-	    //point input to it as well for the next iteration of the loop
+	    //point input to it for the next iteration of the loop
 	    input = input->nextword;
+	    
 	}
-	else {
+	else {	
 	    tail = input;
 	    break;
 	}
     }
+
     right ( &rootnode, tail, 13 );
 }
 
