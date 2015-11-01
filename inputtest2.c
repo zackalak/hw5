@@ -31,7 +31,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "format.h"
 
 //basic node struct in a linked list of words
 struct wordnode {
@@ -135,7 +134,8 @@ while (i < argc){
 	    //printf("compress");
 	}
 	else if ((!strcmp(argv[i] , "-h")) || (!strcmp(argv[i] , "-?"))){
-	    printf("Usage message**");
+	    printf("Format is a simple program that takes in text and outputs it in neatened paragraphs\n");
+	    printf("for more information please see the manpage for format.");
 	    return 0;
 	    //print usage message and exit program
 	}
