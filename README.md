@@ -4,8 +4,8 @@ Zack Sheldon and Sam Meizlish
 
 format - formats text into neat paragraphs
 makefile - compiles/cleans programs
-bugs:
-10hours?
+bugs: does not work. segfaults, also doesn;t free all memory. doesn't compress newlines. doesn't implement justified alignment.
+20hours?
 
 I have adhered to the Honor Code in this assignment
 Zack
