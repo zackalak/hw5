@@ -100,7 +100,8 @@ int main ( int argc, char *argv[] ) {
     int para = 0; //are we still between paragraphs
     
     printf ( "%s %d", "number of args is:", argc );
-    while (j < argc) {
+
+    while (j < argc){
 	//printf("argument is: %s\ni=%d", argv[i],i);
 	if (!strcmp(argv[j] , "-w")){
 	    //width flag
@@ -111,31 +112,32 @@ int main ( int argc, char *argv[] ) {
 	    //printf("width end - %d", width);
 	    }
 	
-	else if (!strcmp(argv[i] , "-r")){
+	else if (!strcmp(argv[j] , "-r")){
 	    //right alignment
 	    alignment = 1;
 	    j++;
 	    //printf("right\nalignment=%d", alignment);
 	}
-	else if (!strcmp(argv[i] , "-j")){
+	else if (!strcmp(argv[j] , "-j")){
 	    //justified
 	    alignment = 2;
 	    j++;
 	    //printf("justified\nalignment=%d", alignment);
 	}
-	else if (!strcmp(argv[i] , "-s")){
+	else if (!strcmp(argv[j] , "-s")){
 	    //compress spaces
 	    compress = 1;
 	    j++;
 	    //printf("compress");
 	}
-	else if ((!strcmp(argv[i] , "-h")) || (!strcmp(argv[i] , "-?"))){
-	    printf("Usage message**");
+	else if ((!strcmp(argv[j] , "-h")) || (!strcmp(argv[j] , "-?"))){
+	    printf("Format is a simple program that takes in text and outputs it in neatened paragraphs\n");
+	    printf("for more information please see the manpage for format.");
 	    return 0;
 	    //print usage message and exit program
 	}
+	
     }
-
     while ((ch = getchar()) != EOF) {
         if ( ch != ' ' && ch != '\n' ) { 
 	    nonempty = 1;
@@ -143,11 +145,11 @@ int main ( int argc, char *argv[] ) {
 	    if ( para > 0 ) { //we've read in a full paragraph of input plus separating lines
 		switch ( alignment ) {
 		    case 0 :
-			left ( head, tail, width );
+			left ( &rootnode, tail, width );
 		    case 1 :
-			right ( head, tail, width );
+			right ( &rootnode, tail, width );
 		    case 2 :
-			right ( head, tail, width );
+			right ( &rootnode, tail, width );
 		}
 		if ( compress ) { //only one newline
 		    printf ( "\n" );
