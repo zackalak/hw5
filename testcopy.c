@@ -94,7 +94,7 @@ int width = 72;
 int main ( int argc, char *argv[] ) {
     int ch;
     char c;
-    int i = 0; 
+    int i = 1; 
     int j = 0;
     int nonempty =  0;
     int para = 0; //are we still between paragraphs
