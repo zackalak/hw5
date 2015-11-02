@@ -58,10 +58,11 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 	    currwidth += current->length;
 	    
 	    //next word can fit on the line
-	    if ( currwidth + 1 + (*(*current).nextword).length <= width ) {
+	    if ( current->nextword != tail && currwidth + 1 + (*(*current).nextword).length <= width ) {
 		//traverse the list
 		currwidth++;
 		current = current->nextword;
+		
 	    }
 
 	    //next word doesn't fit on the line
@@ -155,5 +156,5 @@ int main (void){
         }
     }
     tail = input;
-    right(&rootnode, tail, 30);    
+    right(&rootnode, tail, 72);    
 }
