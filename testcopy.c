@@ -52,8 +52,7 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 	    if ( current->nextword != tail && currwidth + 1 + (*(*current).nextword).length <= width ) {
 		//traverse the list
 		currwidth++;
-		current = current->nextword;
-		
+		current = current->nextword;		
 	    }
 	    //next word doesn't fit on the line
 	    else {
@@ -89,19 +88,78 @@ struct wordnode *input = &rootnode;
 struct wordnode *tail;
     
 int compress = 1;
-int alignment = 0;
+int alignment = 0; //0=left, 1=right, 2=full
 int width = 72;
 
-int main (void){
+int main ( int argc, char *argv[] ) {
     int ch;
     char c;
     int i = 0; 
+    int j = 0;
     int nonempty =  0;
+    int para = 0; //are we still between paragraphs
+    
+    printf ( "%s %d", "number of args is:", argc );
+    while (j < argc) {
+	//printf("argument is: %s\ni=%d", argv[i],i);
+	if (!strcmp(argv[j] , "-w")){
+	    //width flag
+	    j++;
+	    //printf("width start\n");
+	    width = atoi(argv[i]);
+	    j++;
+	    //printf("width end - %d", width);
+	    }
+	
+	else if (!strcmp(argv[i] , "-r")){
+	    //right alignment
+	    alignment = 1;
+	    j++;
+	    //printf("right\nalignment=%d", alignment);
+	}
+	else if (!strcmp(argv[i] , "-j")){
+	    //justified
+	    alignment = 2;
+	    j++;
+	    //printf("justified\nalignment=%d", alignment);
+	}
+	else if (!strcmp(argv[i] , "-s")){
+	    //compress spaces
+	    compress = 1;
+	    j++;
+	    //printf("compress");
+	}
+	else if ((!strcmp(argv[i] , "-h")) || (!strcmp(argv[i] , "-?"))){
+	    printf("Usage message**");
+	    return 0;
+	    //print usage message and exit program
+	}
+    }
+
     while ((ch = getchar()) != EOF) {
         if ( ch != ' ' && ch != '\n' ) { 
-	    //loop for getting words
+	    nonempty = 1;
+	    
+	    if ( para > 0 ) { //we've read in a full paragraph of input plus separating lines
+		switch ( alignment ) {
+		    case 0 :
+			left ( &rootnode, tail, width );
+		    case 1 :
+			right ( &rootnode, tail, width );
+		    case 2 :
+			right ( &rootnode, tail, width );
+		}
+		if ( compress ) { //only one newline
+		    printf ( "\n" );
+		}
+		else { //print out all the blank lines we've seen
+		    for ( ; para > 0; para-- ) {
+			printf ( "\n" );
+		    }
+		}
+		para = 0;
+	    }
 	    while ( ch != ' ' && ch != '\n' ) {
-		nonempty = 1;
 		c = ch;
 		input->word[i] = c;
 		i++;
@@ -114,6 +172,7 @@ int main (void){
             input->nextword = malloc( sizeof ( struct wordnode ) );
             input = input->nextword;
 	}
+
 	//if ch is whitespace
 	else {    
 	    //consume chars until we get something we want
@@ -127,7 +186,7 @@ int main (void){
 		    }
 		    else { //empty line
 			printf ( "empty line\n" );
-			break;
+			para++;
 		    }
 		}
 		//ch is a space 
@@ -143,6 +202,7 @@ int main (void){
 		}
 	    }
         }
+
     }
     tail = input;
     left(&rootnode, tail, 20);    
