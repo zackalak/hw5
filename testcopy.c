@@ -143,11 +143,11 @@ int main ( int argc, char *argv[] ) {
 	    if ( para > 0 ) { //we've read in a full paragraph of input plus separating lines
 		switch ( alignment ) {
 		    case 0 :
-			left ( &rootnode, tail, width );
+			left ( head, tail, width );
 		    case 1 :
-			right ( &rootnode, tail, width );
+			right ( head, tail, width );
 		    case 2 :
-			right ( &rootnode, tail, width );
+			right ( head, tail, width );
 		}
 		if ( compress ) { //only one newline
 		    printf ( "\n" );
@@ -158,13 +158,16 @@ int main ( int argc, char *argv[] ) {
 		    }
 		}
 		para = 0;
+		//free memory and reassign root here
 	    }
+
 	    while ( ch != ' ' && ch != '\n' ) {
 		c = ch;
 		input->word[i] = c;
 		i++;
 		ch = getchar();
 	    }
+
 	    ungetc ( ch, stdin );
 	    input->length = i;
             input->word[i] = '\0';
