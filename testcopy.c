@@ -15,33 +15,27 @@ struct wordnode {
 
 void left (struct wordnode *head, struct wordnode *tail, int width ){
     
-    //pointers to the current node and last/first words on the current line
+    //pointer to the current node
     struct wordnode *current = head;
-    struct wordnode *end = tail;
+    int lc = 0; //linecount
     
-    int lc = 0;//linecount
-    
-    while (current != end) {
-        while (lc <= width ){
-            if (lc == 0) {//first word on a line
-                printf("%s", &(current->word[0]));
-                lc += current->length;
-                current = current->nextword;
-            }
-            else if (( lc + current->length + 1) <= width ){//if current word can fit on line
-                printf(" %s", &(current->word[0]));
-                lc += current->length + 1;
-                current = current->nextword;
-            }
-            else{//need to go to newline
-                printf("\n%s",&current->word[0]);
-                lc = current->length;
-                current = current->nextword;
-            }
+    while ( lc <= width ){
+        if ( lc == 0 ) { //first word on a line
+            printf("%s", &( current->word[0] ) );
+            lc += current->length;
         }
+        else if (( lc + current->length + 1) <= width ) { //if current word can fit on line
+            printf( " %s", & (current->word[0] ) );
+            lc += current->length + 1;
+        }
+        else { //need to go to newline
+            printf( "\n%s", &( current->word[0] ) );
+            lc = current->length;
+        }
+	if ( current->nextword != tail ) current = current->nextword;
+	else break;
     }
 }
-
 
 void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 
@@ -64,7 +58,6 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 		current = current->nextword;
 		
 	    }
-
 	    //next word doesn't fit on the line
 	    else {
 		lastonline = current;
@@ -72,7 +65,7 @@ void right ( struct wordnode *head, struct wordnode *tail, int width ) {
 	    }
 	}
 
-    //print out the line
+	//print out the line
 	margin = width - currwidth;
 	//print [margin] spaces
 	for ( int i = 0; i < margin; i++ ) printf ( " " );
@@ -98,8 +91,6 @@ struct wordnode *input = &rootnode;
 //pointer to last node
 struct wordnode *tail;
     
-int currwidth = 0;
-int margin = 0;
 int compress = 1;
 int alignment = 0;
 int width = 72;
@@ -156,5 +147,5 @@ int main (void){
         }
     }
     tail = input;
-    right(&rootnode, tail, 72);    
+    left(&rootnode, tail, 20);    
 }
