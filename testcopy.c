@@ -1,20 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 
 struct wordnode {
     //array of chars to hold the word (we're told max length is 100)
-    char word[ 102 ];//for possibility of length 100 word + newline + \0
-    
+    char word[ 101 ]; //for possibility of length 100 word + \0
     //pointer to the next word
     struct wordnode *nextword;
     int length;
-    int white;
 };
 
 void left (struct wordnode *head, struct wordnode *tail, int width ){
-    
+
     //pointer to the current node
     struct wordnode *current = head;
     int lc = 0; //linecount
@@ -110,6 +107,7 @@ int main (void){
 		i++;
 		ch = getchar();
 	    }
+	    ungetc ( ch, stdin );
 	    input->length = i;
             input->word[i] = '\0';
             i = 0;
